@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartWash – Hostel Laundry Slot Booking System</title>
+  <meta name="description" content="A modern, student-friendly hostel laundry slot booking prototype designed to eliminate queues and save student time. College Design Thinking Project.">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧺</text></svg>">
+</head>
+<body>
+
+  <!-- Top Prototype Disclaimer Banner -->
+  <aside class="demo-banner" aria-label="Prototype announcement">
+    <span>
+      <span class="demo-banner-badge">Design Thinking Prototype</span>
+      Demo prototype — availability is simulated for college hostel testing.
+    </span>
+    <button class="demo-banner-btn" id="banner-quick-guide" title="View test scenarios">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      Test Scenarios
+    </button>
+  </aside>
+
+  <!-- ======================================================================
+       Screen 1: Login Page
+       ====================================================================== -->
+  <main class="app-screen active" id="screen-login" aria-label="SmartWash Login">
+    <div class="login-page">
+      <div class="login-bg-decor"></div>
+      <div class="login-bg-decor-2"></div>
+
+      <div class="login-card">
+        <header class="brand-header-center">
+          <div class="brand-icon-wrapper" aria-hidden="true">
+            <!-- Washing Machine Modern SVG Icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="2" width="16" height="20" rx="3"></rect>
+              <circle cx="12" cy="13" r="5"></circle>
+              <path d="M12 11a2 2 0 1 0 2 2"></path>
+              <line x1="8" y1="6" x2="8.01" y2="6" stroke-width="3"></line>
+              <line x1="11" y1="6" x2="11.01" y2="6" stroke-width="3"></line>
+            </svg>
+          </div>
+          <h1 class="brand-title">Smart<span class="accent">Wash</span></h1>
+          <p class="login-welcome-tagline">
+            <strong>Welcome to SmartWash!</strong><br>
+            Book your laundry slot without waiting in queues.
+          </p>
+        </header>
+
+        <form class="login-form" id="login-form" onsubmit="return false;">
+          <div class="form-group">
+            <label for="login-email" class="form-label">
+              <span>Student Email / Room No.</span>
+              <span class="quick-demo-pill" id="btn-fill-demo" title="Click to fill sample student credentials">Use Demo</span>
+            </label>
+            <div class="input-with-icon">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <input type="text" id="login-email" class="form-input" placeholder="e.g. rahul.k@hostel.edu or Room 204" required autocomplete="username">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="login-password" class="form-label">
+              <span>Password</span>
+            </label>
+            <div class="input-with-icon">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <input type="password" id="login-password" class="form-input" placeholder="Enter password (demo: 123456)" required autocomplete="current-password">
+              <button type="button" class="password-toggle-btn" id="btn-toggle-password" aria-label="Toggle password visibility">
+                <svg id="eye-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary" id="btn-login-submit">
+            <span>Log In to SmartWash</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+
+          <div class="login-divider">
+            <span>OR QUICK TESTING</span>
+          </div>
+
+          <button type="button" class="btn-secondary" id="btn-guest-login">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+            <span>Continue as Guest</span>
+          </button>
+        </form>
+
+        <footer class="login-footer-note">
+          <p><strong>College Design Thinking Project:</strong> Prototype for hostel laundry slot booking. No personal passwords required.</p>
+        </footer>
+      </div>
+    </div>
+  </main>
+
+  <!-- ======================================================================
+       Screen 2: Authenticated Main Dashboard & Navigation
+       ====================================================================== -->
+  <div class="app-screen" id="screen-dashboard-app">
+    
+    <!-- Top Global App Header -->
+    <header class="app-header">
+      <div class="header-container">
+        <!-- Logo -->
+        <div class="header-logo-group" id="nav-brand-click">
+          <div class="header-logo-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="4" y="2" width="16" height="20" rx="3"></rect>
+              <circle cx="12" cy="13" r="5"></circle>
+              <path d="M12 11a2 2 0 1 0 2 2"></path>
+              <line x1="8" y1="6" x2="8.01" y2="6" stroke-width="3"></line>
+            </svg>
+          </div>
+          <div class="header-logo-text">
+            <span>SmartWash</span>
+            <span class="header-logo-tag">Hostel</span>
+          </div>
+        </div>
+
+        <!-- Main Navigation Links -->
+        <nav class="header-nav" aria-label="Main Navigation">
+          <button class="nav-link-btn active" id="nav-tab-dashboard" data-target="view-dashboard">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            <span class="nav-text">Dashboard</span>
+          </button>
+          <button class="nav-link-btn" id="nav-tab-bookings" data-target="view-bookings">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            <span class="nav-text">My Bookings</span>
+            <span class="nav-badge-count" id="header-booking-badge">1</span>
+          </button>
+        </nav>
+
+        <!-- User Profile & Logout -->
+        <div class="header-user-group">
+          <div class="user-profile-badge" id="btn-user-profile" title="View Student Profile">
+            <div class="user-avatar" id="header-avatar-initials">RK</div>
+            <div class="user-info-text">
+              <span class="user-name" id="header-user-name">Rahul Kumar</span>
+              <span class="user-room" id="header-user-room">Block B • 204</span>
+            </div>
+          </div>
+          <button class="btn-logout" id="btn-logout" title="Log out">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            <span class="nav-text">Logout</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+
+      <!-- ==================================================================
+           VIEW 1: Dashboard (All Slots on One Screen)
+           ================================================================== -->
+      <section class="view-panel active" id="view-dashboard">
+        
+        <!-- Hero Greeting Banner -->
+        <div class="dashboard-hero">
+          <div class="hero-text-block">
+            <div class="hero-sub-tag">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <span>Laundry Made Simple</span>
+            </div>
+            <h1 class="hero-title" id="hero-greeting-text">Hi, Rahul! Find Your Laundry Slot</h1>
+            <p class="hero-subtitle">
+              Choose an available washing machine and book a time that suits you. No more walking down to check or standing in long queues!
+            </p>
+            <div class="hero-date-pill">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span id="hero-current-date-label">Today • Ground Floor Laundry Room</span>
+            </div>
+          </div>
+
+          <!-- Compact Summary Stat Cards -->
+          <div class="hero-summary-cards" aria-label="Laundry Room Summary">
+            <div class="stat-counter-card">
+              <div class="stat-header">
+                <span class="stat-dot available"></span>
+                <span>Available</span>
+              </div>
+              <span class="stat-number" id="stat-count-available">0</span>
+            </div>
+
+            <div class="stat-counter-card">
+              <div class="stat-header">
+                <span class="stat-dot booked"></span>
+                <span>Booked</span>
+              </div>
+              <span class="stat-number" id="stat-count-booked">0</span>
+            </div>
+
+            <div class="stat-counter-card">
+              <div class="stat-header">
+                <span class="stat-dot inuse"></span>
+                <span>In Use</span>
+              </div>
+              <span class="stat-number" id="stat-count-inuse">0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controls: Date Selector Track & Simple Filters -->
+        <div class="dashboard-controls">
+          <!-- Row 1: Date Selector Track -->
+          <div class="controls-row-date">
+            <div class="controls-label">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span>Select Date:</span>
+            </div>
+            <div class="date-selector-track" id="date-selector-track" role="tablist" aria-label="Select Date">
+              <!-- Dynamically populated by app.js -->
+            </div>
+          </div>
+
+          <div class="controls-divider"></div>
+
+          <!-- Row 2: Filter Pills & Smart Assistant -->
+          <div class="controls-row-filters">
+            <div class="filter-pills-group" role="group" aria-label="Slot Time Filters">
+              <span class="controls-label" style="margin-right: 4px;">Filter:</span>
+              <button class="filter-pill active" data-filter="all">All Slots</button>
+              <button class="filter-pill" data-filter="available">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                Available Only
+              </button>
+              <button class="filter-pill" data-filter="morning">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/></svg>
+                Morning
+              </button>
+              <button class="filter-pill" data-filter="afternoon">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/></svg>
+                Afternoon
+              </button>
+              <button class="filter-pill" data-filter="evening">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                Evening
+              </button>
+            </div>
+
+            <!-- Smart Slot Finder Trigger CTA -->
+            <button class="smart-finder-cta-btn" id="btn-toggle-smart-finder">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <span>Find a Slot That Suits Me</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Smart Slot Finder Expandable Form (Requirement 5) -->
+        <section class="smart-finder-card" id="smart-finder-panel" aria-label="Smart Slot Matcher">
+          <div class="finder-header">
+            <div class="finder-title-group">
+              <div class="finder-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              </div>
+              <div>
+                <h3 style="font-size: 1.125rem; font-weight: 700;">Find a slot that suits your schedule</h3>
+                <p style="font-size: 0.8125rem; color: var(--text-muted);">Pick your preferred time range and we'll instantly find the best open slot.</p>
+              </div>
+            </div>
+            <button type="button" class="modal-close-btn" id="btn-close-smart-finder" aria-label="Close Smart Finder">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+
+          <div class="finder-form-row">
+            <div class="form-group">
+              <label class="form-label">Preferred Day</label>
+              <select class="select-custom" id="finder-select-day">
+                <!-- Dynamically populated -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Time of Day</label>
+              <select class="select-custom" id="finder-select-period">
+                <option value="morning">Morning (7:00 AM - 12:00 PM)</option>
+                <option value="afternoon">Afternoon (1:00 PM - 5:00 PM)</option>
+                <option value="evening" selected>Evening (5:00 PM - 10:00 PM)</option>
+                <option value="any">Any Time</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Machine Preference</label>
+              <select class="select-custom" id="finder-select-machine">
+                <option value="all">Any Available Washing Machine</option>
+                <option value="1">Machine 1 (Front Load 7kg)</option>
+                <option value="2">Machine 2 (Front Load 8kg Heavy)</option>
+                <option value="3">Machine 3 (Top Load 7.5kg)</option>
+                <option value="4">Machine 4 (Quick Wash 6kg Eco)</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; gap: 10px;">
+            <button class="btn-primary" style="width: auto; padding: 10px 20px;" id="btn-run-smart-finder">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <span>Match Best Slot</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- No Slots Available Helpful Card (Requirement 5) -->
+        <section class="no-slots-container" id="no-slots-alert" style="display: none;" aria-live="polite">
+          <div class="no-slots-header">
+            <div class="no-slots-icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <div class="no-slots-text-group">
+              <h2 class="no-slots-title">All slots are booked for this time. Don't worry!</h2>
+              <p class="no-slots-desc">
+                Check the next available slots below and choose a time that works for you, or switch to another day.
+              </p>
+            </div>
+          </div>
+
+          <!-- Suggested Alternatives Grid -->
+          <div class="alternatives-container">
+            <h3 class="alternatives-heading">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              <span>Nearest Open Alternatives:</span>
+            </h3>
+            <div class="alternatives-grid" id="alternatives-list">
+              <!-- Dynamically populated alternative slot cards -->
+            </div>
+          </div>
+
+          <!-- Action bar -->
+          <div class="no-slots-actions-bar">
+            <button class="btn-secondary" style="width: auto;" id="btn-alt-view-today">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+              <span>View Today's Slots</span>
+            </button>
+            <button class="btn-secondary" style="width: auto;" id="btn-alt-view-tomorrow">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+              <span>View Tomorrow</span>
+            </button>
+            <button class="btn-primary" style="width: auto;" id="btn-alt-jump-next">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              <span>Show Next Available Slot</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Slots Header Summary -->
+        <div class="slots-view-header">
+          <h2 class="slots-view-title">
+            <span>Hostel Washing Machines</span>
+            <span class="slots-active-summary-tag" id="slots-filter-indicator">Showing All Slots</span>
+          </h2>
+          <span style="font-size: 0.8125rem; color: var(--text-muted);" id="slots-current-date-text"></span>
+        </div>
+
+        <!-- Machines & Slots Grid Container -->
+        <div class="machines-container" id="machines-container">
+          <!-- Rendered dynamically by app.js -->
+        </div>
+
+      </section>
+
+      <!-- ==================================================================
+           VIEW 2: My Bookings Section (Requirement 6)
+           ================================================================== -->
+      <section class="view-panel" id="view-bookings">
+        <div class="my-bookings-container">
+          <div class="section-header-row">
+            <div>
+              <h1 class="section-title">My Laundry Bookings</h1>
+              <p class="section-subtitle">Track your upcoming laundry slots and manage or cancel reservations.</p>
+            </div>
+            <button class="btn-primary" style="width: auto; padding: 10px 18px;" id="btn-book-another-slot">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              <span>Book a New Slot</span>
+            </button>
+          </div>
+
+          <!-- Active Bookings List -->
+          <div class="bookings-list" id="my-bookings-list">
+            <!-- Dynamically populated -->
+          </div>
+
+          <!-- Empty State (Shown when no active bookings) -->
+          <div class="empty-state-box" id="empty-bookings-box" style="display: none;">
+            <div class="empty-state-icon-circle">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="10" y1="14" x2="14" y2="18"/><line x1="14" y1="14" x2="10" y2="18"/></svg>
+            </div>
+            <h2 class="empty-state-title">No upcoming bookings yet</h2>
+            <p class="empty-state-desc">
+              You haven't reserved any washing machine slots. Pick a convenient time on the dashboard to ensure a machine is ready when you arrive.
+            </p>
+            <button class="btn-primary" style="width: auto; padding: 12px 24px;" id="btn-empty-find-slot">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <span>Find an Available Slot</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ======================================================================
+       Booking Confirmation Modal (Requirement 4)
+       ====================================================================== -->
+  <div class="modal-backdrop" id="modal-confirm-booking" role="dialog" aria-modal="true" aria-labelledby="booking-modal-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-title-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <h2 class="modal-title" id="booking-modal-title">Confirm Slot Booking</h2>
+        </div>
+        <button class="modal-close-btn" id="btn-close-booking-modal" aria-label="Close dialog">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <p style="font-size: 0.9375rem; color: var(--text-body);">
+          Please review your booking details before confirming your slot.
+        </p>
+
+        <div class="modal-summary-grid">
+          <div class="summary-row">
+            <span class="summary-label">Washing Machine:</span>
+            <span class="summary-value" id="modal-machine-name">-</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Machine Type:</span>
+            <span class="summary-value" id="modal-machine-type">-</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Date:</span>
+            <span class="summary-value" id="modal-slot-date">-</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Time Slot:</span>
+            <span class="summary-value" id="modal-slot-time">-</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Estimated Duration:</span>
+            <span class="summary-value" id="modal-slot-duration">60 minutes</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Location:</span>
+            <span class="summary-value" id="modal-slot-location">Ground Floor Laundry Room</span>
+          </div>
+        </div>
+
+        <div class="modal-note-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <span><strong>Friendly Reminder:</strong> Please bring your own detergent and arrive 5 minutes before your slot starts to ensure seamless rotation for everyone.</span>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" style="width: auto;" id="btn-cancel-booking-modal">
+            Cancel
+          </button>
+          <button type="button" class="btn-primary" style="width: auto;" id="btn-confirm-booking-action">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Confirm Booking</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       Cancel Booking Confirmation Modal (Requirement 4 & 6)
+       ====================================================================== -->
+  <div class="modal-backdrop" id="modal-cancel-booking" role="dialog" aria-modal="true" aria-labelledby="cancel-modal-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-title-icon" style="background: var(--status-danger-bg); color: var(--status-danger-color);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          </div>
+          <h2 class="modal-title" id="cancel-modal-title">Cancel Laundry Slot?</h2>
+        </div>
+        <button class="modal-close-btn" id="btn-close-cancel-modal" aria-label="Close dialog">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <p style="font-size: 0.9375rem; color: var(--text-body);">
+          Are you sure you want to cancel this booking? This slot will immediately be made available for other hostel students to book.
+        </p>
+
+        <div class="modal-summary-grid">
+          <div class="summary-row">
+            <span class="summary-label">Booking Ref:</span>
+            <span class="summary-value" id="cancel-modal-ref">-</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Machine:</span>
+            <span class="summary-value" id="cancel-modal-machine">-</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Date & Time:</span>
+            <span class="summary-value" id="cancel-modal-datetime">-</span>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" style="width: auto;" id="btn-dismiss-cancel">
+            Keep Booking
+          </button>
+          <button type="button" class="btn-cancel-booking" style="padding: 10px 18px;" id="btn-execute-cancel">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            <span>Yes, Cancel Slot</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       Student Profile Modal
+       ====================================================================== -->
+  <div class="modal-backdrop" id="modal-student-profile" role="dialog" aria-modal="true" aria-labelledby="profile-modal-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <div class="modal-title-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <h2 class="modal-title" id="profile-modal-title">Student Profile</h2>
+        </div>
+        <button class="modal-close-btn" id="btn-close-profile-modal" aria-label="Close dialog">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 6px;">
+          <div class="user-avatar" style="width: 52px; height: 52px; font-size: 1.25rem;">RK</div>
+          <div>
+            <h3 style="font-size: 1.125rem; font-weight: 800;" id="prof-modal-name">Rahul Kumar</h3>
+            <span style="font-size: 0.8125rem; color: var(--text-muted);" id="prof-modal-role">Hostel Resident • Active</span>
+          </div>
+        </div>
+
+        <div class="modal-summary-grid">
+          <div class="summary-row">
+            <span class="summary-label">Hostel & Room:</span>
+            <span class="summary-value" id="prof-modal-hostel">Boys Hostel 2 • Room 204</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Student ID:</span>
+            <span class="summary-value" id="prof-modal-id">STU-2024-8842</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Email:</span>
+            <span class="summary-value" id="prof-modal-email">rahul.k@hostel.edu</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">Monthly Laundry Quota:</span>
+            <span class="summary-value" style="color: var(--secondary);">4 Washes / Week (Free)</span>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" style="width: auto;" id="btn-close-profile-action">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       Toast Notifications Container (Requirement 7)
+       ====================================================================== -->
+  <div class="toast-container" id="toast-container" aria-live="assertive">
+    <!-- Dynamically injected notifications -->
+  </div>
+
+  <!-- ======================================================================
+       Design Thinking Testing Helper Widget (Requirement 10)
+       ====================================================================== -->
+  <div class="dt-tester-widget">
+    <button class="dt-tester-trigger" id="dt-tester-toggle">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      <span>DT Test Scenarios</span>
+    </button>
+
+    <div class="dt-tester-popup" id="dt-tester-popup">
+      <div class="dt-tester-title">
+        <span>Design Thinking Scenarios</span>
+        <button class="modal-close-btn" id="dt-tester-close" style="padding: 2px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <p style="font-size: 0.75rem; color: var(--text-muted);">
+        One-tap shortcuts for student user testing:
+      </p>
+      <div class="dt-tester-list">
+        <button class="dt-scenario-btn" id="dt-test-book">
+          <span>1.</span> Book an available slot (Today Morning)
+        </button>
+        <button class="dt-scenario-btn" id="dt-test-fullybooked">
+          <span>2.</span> Test "All Slots Booked" &amp; Alternatives
+        </button>
+        <button class="dt-scenario-btn" id="dt-test-filter-evening">
+          <span>3.</span> Filter by Evening Slots
+        </button>
+        <button class="dt-scenario-btn" id="dt-test-my-bookings">
+          <span>4.</span> View &amp; Cancel Existing Booking
+        </button>
+      </div>
+      <button class="dt-reset-btn" id="dt-test-reset">Reset Prototype Demo Data</button>
+    </div>
+  </div>
+
+  <!-- Load Data and Application Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
